@@ -19,7 +19,7 @@ import javax.validation.constraints.Size;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne(mappedBy = "address", fetch = FetchType.LAZY)
