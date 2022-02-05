@@ -1,6 +1,6 @@
 package com.techeer.techeers.domain.hello.controller;
 
-import com.techeer.techeers.domain.hello.dto.Name;
+import com.techeer.techeers.domain.hello.dto.NameDto;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +22,7 @@ public class HelloController {
     }
 
     @PostMapping(value = "/posts")
-    public Name posts(@RequestBody Name name) {
-        return name;
+    public NameDto posts(@RequestBody NameDto nameDto) {
+        return nameDto;
     }
 }

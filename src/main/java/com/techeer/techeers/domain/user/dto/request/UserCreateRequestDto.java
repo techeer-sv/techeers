@@ -13,7 +13,6 @@ import javax.persistence.Id;
 public class UserCreateRequestDto {
 
     private String firstName;
-
     private String email;
 
     public UserEntity toEntity() {

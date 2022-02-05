@@ -4,7 +4,7 @@ import lombok.Getter;
 
 
 @Getter
-public class Name {
+public class NameDto {
 
 //    @Getter
     private String username;
