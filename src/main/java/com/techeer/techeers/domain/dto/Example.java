@@ -1,4 +1,4 @@
-package com.techeer.techeers.dto;
+package com.techeer.techeers.domain.dto;
 
 import lombok.Getter;
 

@@ -1,6 +1,6 @@
 package com.techeer.techeers.domain.hello.Controller;
 
-import com.techeer.techeers.dto.Example;
+import com.techeer.techeers.domain.dto.Example;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
