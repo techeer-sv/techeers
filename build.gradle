@@ -29,6 +29,8 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-rest-hal-explorer'
 	implementation('org.slf4j:jcl-over-slf4j')
 	implementation('ch.qos.logback:logback-classic')
+	implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
+	implementation 'com.google.guava:guava:31.0.1-jre'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
