@@ -1,4 +1,4 @@
-package com.techeer.techeers.domain.user.Entity;
+package com.techeer.techeers.domain.user.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,7 +27,7 @@ public class UserEntity {
     @Column(nullable = false , length = 50)
     private String phoneNumber;
 
-//    @ColumnDefault("user")
+    //    @ColumnDefault("user")
 //    private String role;
     @Builder
     public UserEntity(String firstName, String email, String password, String phoneNumber) {
