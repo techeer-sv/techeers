@@ -1,5 +1,6 @@
 package com.techeer.techeers.domain.user.controller;
 
+import com.techeer.techeers.domain.user.dto.mapper.UserMapper;
 import com.techeer.techeers.domain.user.dto.request.UserCreateRequestDto;
 import com.techeer.techeers.domain.user.dto.request.UserUpdateRequestDto;
 import com.techeer.techeers.domain.user.dto.response.UserResponseDto;
@@ -27,14 +28,15 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final UserMapper userMapper;
 
     @GetMapping
     public ResponseEntity<List<UserResponseDto>> get() {
 
-        List<UserResponseDto> entityList = userService.findAll().stream().map((entity) -> UserResponseDto.builder()
-                .id(entity.getId())
-                .email(entity.getEmail())
-                .build()).collect(Collectors.toList());
+        List<UserResponseDto> entityList = userService.findAll()
+                .stream()
+                .map(userMapper::toResponseDto)
+                .collect(Collectors.toList());
 
         return ResponseEntity.ok()
                 .body(entityList);
@@ -44,58 +46,29 @@ public class UserController {
     public ResponseEntity<UserResponseDto> get(@PathVariable Long id) {
 
         User entity = userService.findOneById(id);
-
-        UserResponseDto responseDto = UserResponseDto.builder()
-                .id(entity.getId())
-                .email(entity.getEmail())
-                .build();
-
         return ResponseEntity.ok()
-                .body(responseDto);
+                .body(userMapper.toResponseDto(entity));
     }
 
     @PostMapping
     public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserCreateRequestDto requestDto) {
 
-        User entity = userService.create(
-                User.builder()
-                        .email(requestDto.getEmail())
-                        .password(requestDto.getPassword())
-                        .build()
-        );
-
-        UserResponseDto responseDto = UserResponseDto.builder()
-                .id(entity.getId())
-                .email(entity.getEmail())
-                .build();
-
+        User entity = userService.create(userMapper.toEntity(requestDto));
         return ResponseEntity.created(
                         WebMvcLinkBuilder
                                 .linkTo(UserController.class)
                                 .slash(entity.getId())
                                 .toUri()
                 )
-                .body(responseDto);
+                .body(userMapper.toResponseDto(entity));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequestDto requestDto) {
 
-        User updatedEntity = userService.update(
-                id,
-                User.builder()
-                        .email(requestDto.getEmail())
-                        .password(requestDto.getPassword())
-                        .build()
-        );
-
-        UserResponseDto responseDto = UserResponseDto.builder()
-                .id(updatedEntity.getId())
-                .email(updatedEntity.getEmail())
-                .build();
-
+        User updatedEntity = userService.update(id, userMapper.toEntity(requestDto));
         return ResponseEntity.ok()
-                .body(responseDto);
+                .body(userMapper.toResponseDto(updatedEntity));
     }
 
     @DeleteMapping("/{id}")
