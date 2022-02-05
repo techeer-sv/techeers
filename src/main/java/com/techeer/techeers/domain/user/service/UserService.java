@@ -25,9 +25,21 @@ public class UserService {
     }
 
     @Transactional
-    public User update(Long id, User user) {
-        user.update(user.getEmail(), user.getPassword());
-        return userRepository.save(user);
+    public User update(Long id, User updatedEntity) {
+
+        User entity = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id=" + id));
+
+        entity.update(
+                updatedEntity.getEmail(),
+                updatedEntity.getPassword(),
+                updatedEntity.getFirstName(),
+                updatedEntity.getLastName(),
+                updatedEntity.getPhoneNumber(),
+                updatedEntity.getAddress()
+        );
+
+        return userRepository.save(entity);
     }
 
     @Transactional

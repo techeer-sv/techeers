@@ -9,12 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponseDto {
+public class AddressResponseDto {
 
-    private Long id;
-    private String email;
-    private String firstName;
-    private String lastName;
-    private String phoneNumber;
-    private AddressResponseDto address;
+    private String state;
+    private String city;
+    private String zipcode;
+    private String street;
 }

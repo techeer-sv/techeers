@@ -12,26 +12,21 @@ import javax.validation.constraints.Size;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreateRequestDto {
-
-    @Size(max = 255)
-    private String email;
-
-    @Size(max = 16)
-    private String password;
+public class AddressCreateRequestDto {
 
     @NotNull
     @Size(max = 50)
-    private String firstName;
+    private String state;
 
     @NotNull
     @Size(max = 50)
-    private String lastName;
+    private String city;
 
     @NotNull
     @Size(max = 50)
-    private String phoneNumber;
+    private String zipcode;
 
     @NotNull
-    private AddressCreateRequestDto address;
+    @Size(max = 50)
+    private String street;
 }
