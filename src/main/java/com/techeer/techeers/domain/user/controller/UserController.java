@@ -5,16 +5,11 @@ import com.techeer.techeers.domain.user.dto.request.UserCreateRequestDto;
 import com.techeer.techeers.domain.user.dto.request.UserUpdateRequestDto;
 import com.techeer.techeers.domain.user.dto.response.UserResponseDto;
 import com.techeer.techeers.domain.user.entity.UserEntity;
-import com.techeer.techeers.domain.user.repository.UserRepository;
 import com.techeer.techeers.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
-import org.apache.coyote.Response;
 import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -54,9 +49,16 @@ public class UserController {
                 .body(entityList);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public ResponseEntity<UserResponseDto> getUserById(@PathVariable Long id) {
         UserEntity entity = userService.findById(id);
+        return ResponseEntity.ok()
+                .body(userMapper.toResponseDto(entity));
+
+    }
+    @GetMapping("/email/{email}")
+    public ResponseEntity<UserResponseDto> getUserByEmail(@PathVariable String email) {
+        UserEntity entity = userService.findByEmail(email);
         return ResponseEntity.ok()
                 .body(userMapper.toResponseDto(entity));
 
@@ -69,19 +71,11 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-//        try {
-//            userService.deleteById(id);
-//            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
         userService.deleteById(id);
         return ResponseEntity.ok()
                 .body(null);
     }
 
-
-    //200
     @PutMapping("/{id}")
     public ResponseEntity<UserResponseDto> updateUser(@PathVariable Long id, @Valid @RequestBody UserUpdateRequestDto requestDto) {
 

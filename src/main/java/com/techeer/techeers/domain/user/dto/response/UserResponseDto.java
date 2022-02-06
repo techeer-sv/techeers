@@ -18,13 +18,4 @@ public class UserResponseDto {
     private String lastName;
     private String phoneNumber;
 
-//    public UserResponseDto toResponseDto() {
-//        return UserResponseDto.builder()
-//                .id(id)
-//                .email(email)
-//                .firstName(firstName)
-//                .lastName(lastName)
-//                .phoneNumber(phoneNumber)
-//                .build();
-//    }
 }

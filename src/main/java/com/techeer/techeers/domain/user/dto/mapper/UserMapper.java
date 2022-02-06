@@ -5,7 +5,6 @@ import com.techeer.techeers.domain.user.dto.request.UserUpdateRequestDto;
 import com.techeer.techeers.domain.user.dto.response.UserResponseDto;
 import com.techeer.techeers.domain.user.entity.UserEntity;
 import lombok.RequiredArgsConstructor;
-import org.apache.catalina.User;
 import org.springframework.stereotype.Component;
 
 @Component

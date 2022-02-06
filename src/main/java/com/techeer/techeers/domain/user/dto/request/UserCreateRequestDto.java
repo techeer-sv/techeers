@@ -17,15 +17,4 @@ public class UserCreateRequestDto {
     private String email;
     private String phoneNumber;
 
-
-//    public UserEntity toEntity() {
-//        return UserEntity.builder()
-//                .email(email)
-//                .firstName(firstName)
-//                .lastName(lastName)
-//                .password(password)
-//                .phoneNumber(phoneNumber)
-//                .build();
-//    }
-
 }

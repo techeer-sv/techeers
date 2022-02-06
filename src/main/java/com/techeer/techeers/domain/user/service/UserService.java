@@ -25,7 +25,10 @@ public class UserService {
     public UserEntity findById(Long id) { //Optional
         return userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found with id=" + id));
-
+    }
+    public UserEntity findByEmail(String email) {
+        return userRepository.finByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with email=" + email));
     }
 
     public void deleteAllData() {
@@ -50,4 +53,6 @@ public class UserService {
 
         return userRepository.save(entity);
     }
+
+
 }

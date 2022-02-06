@@ -41,4 +41,5 @@ public class UserEntity {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
     }
+
 }
