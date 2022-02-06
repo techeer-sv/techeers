@@ -3,6 +3,7 @@ package com.techeer.techeers.domain.user.service;
 import com.techeer.techeers.domain.user.entity.UserEntity;
 import com.techeer.techeers.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,15 +16,16 @@ public class UserService {
 
     public UserEntity save(UserEntity userEntity) {
         return userRepository.save(userEntity);
-//        return userEntity;
     }
 
-    public List<UserEntity> findUsers() {
+    public List<UserEntity> findAll() {
         return userRepository.findAll();
     }
 
-    public Optional<UserEntity> findById(Long id) {
-        return userRepository.findById(id);
+    public UserEntity findById(Long id) { //Optional
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id=" + id));
+
     }
 
     public void deleteAllData() {
@@ -35,7 +37,17 @@ public class UserService {
     }
 //    void deleteAllData();
 
-    // 삭제
-    // 수정
+    public UserEntity update(Long id, UserEntity updatedEntity) {
+        UserEntity entity = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found with id=" + id));
+        entity.update(
+                updatedEntity.getEmail(),
+                updatedEntity.getPassword(),
+                updatedEntity.getFirstName(),
+                updatedEntity.getLastName(),
+                updatedEntity.getPhoneNumber()
+        );
 
+        return userRepository.save(entity);
+    }
 }

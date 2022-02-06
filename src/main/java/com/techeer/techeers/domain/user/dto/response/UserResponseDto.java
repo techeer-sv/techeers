@@ -1,31 +1,30 @@
-package com.techeer.techeers.domain.user.dto.request;
+package com.techeer.techeers.domain.user.dto.response;
 
 import com.techeer.techeers.domain.user.entity.UserEntity;
-import lombok.*;
-
-import javax.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserCreateRequestDto {
+public class UserResponseDto {
 
+    private Long id;
+    private String email;
     private String firstName;
     private String lastName;
-    private String password;
-    private String email;
     private String phoneNumber;
 
-
-//    public UserEntity toEntity() {
-//        return UserEntity.builder()
+//    public UserResponseDto toResponseDto() {
+//        return UserResponseDto.builder()
+//                .id(id)
 //                .email(email)
 //                .firstName(firstName)
 //                .lastName(lastName)
-//                .password(password)
 //                .phoneNumber(phoneNumber)
 //                .build();
 //    }
-
 }
