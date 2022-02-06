@@ -1,21 +1,20 @@
-package com.techeer.techeers.domain.hello.Controller;
+package com.techeer.techeers.domain.user.controller;
 
-import com.techeer.techeers.domain.dto.Example;
+import com.techeer.techeers.domain.user.dto.Example;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
 public class HelloController {
-
     @GetMapping("/querystringtest")
     public String getHello(@RequestParam String number) {
 
+//            entity = To_entity
+//            userService.creatuser(number) // service function
         return "hello" + " " + number;
     }
 
-
-
-    @PostMapping("/jsonexample")
+    @PostMapping("/user")
     public String getHello(@RequestBody Example cont) {
 
         return "hello" + " " + cont.getName();
