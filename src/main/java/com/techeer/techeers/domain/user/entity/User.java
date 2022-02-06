@@ -1,5 +1,6 @@
 package com.techeer.techeers.domain.user.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,35 +12,45 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class UserEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @Column(length = 50)
+    private Long id;
+    @NotNull
     private String firstName;
-    @Column(length = 50)
+    @NotNull
     private String lastName;
-    @Column(length = 50)
+    @NotNull
     private String email;
-    @Column(length = 50)
+    @Setter
+    @NotNull
+    @Column(length = 128)
     private String password;
-    @Column(length = 50)
+
+    @NotNull
+    @Column(length = 128)
     private String phoneNumber;
 
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", nullable = false)
+    private Address address;
+
     @Builder
-    public UserEntity(String firstName, String lastName, String email, String password, String phoneNumber) {
+    public User(String firstName, String lastName, String email, String password, String phoneNumber, Address address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
-    public void update(String email, String password, String firstName, String lastName, String phoneNumber) {
+    public void update(String email, String password, String firstName, String lastName, String phoneNumber, Address address) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
+        this.address = address;
     }
 
 }

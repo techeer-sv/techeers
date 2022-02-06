@@ -24,4 +24,6 @@ public class UserUpdateRequestDto {
     @NotNull
     private String phoneNumber;
 
+    @NotNull
+    private AddressUpdateRequestDto address;
 }

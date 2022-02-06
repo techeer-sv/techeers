@@ -1,9 +1,6 @@
 package com.techeer.techeers.domain.user.dto.request;
 
-import com.techeer.techeers.domain.user.entity.UserEntity;
 import lombok.*;
-
-import javax.persistence.Id;
 
 @Getter
 @Builder
@@ -16,5 +13,7 @@ public class UserCreateRequestDto {
     private String password;
     private String email;
     private String phoneNumber;
+
+    private AddressCreateRequestDto address;
 
 }
