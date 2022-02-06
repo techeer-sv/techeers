@@ -31,22 +31,25 @@ public class UserController {
     private final UserMapper userMapper;
 
     @GetMapping
-    public ResponseEntity<List<UserResponseDto>> get() {
+    public ResponseEntity<List<UserResponseDto>> getList() {
 
         List<UserResponseDto> entityList = userService.findAll()
                 .stream()
                 .map(userMapper::toResponseDto)
                 .collect(Collectors.toList());
 
-        return ResponseEntity.ok()
+        return ResponseEntity
+                .ok()
                 .body(entityList);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponseDto> get(@PathVariable Long id) {
 
-        User entity = userService.findOneById(id);
-        return ResponseEntity.ok()
+        User entity = userService.findById(id);
+
+        return ResponseEntity
+                .ok()
                 .body(userMapper.toResponseDto(entity));
     }
 
@@ -54,11 +57,12 @@ public class UserController {
     public ResponseEntity<UserResponseDto> create(@Valid @RequestBody UserCreateRequestDto requestDto) {
 
         User entity = userService.create(userMapper.toEntity(requestDto));
-        return ResponseEntity.created(
-                        WebMvcLinkBuilder
-                                .linkTo(UserController.class)
-                                .slash(entity.getId())
-                                .toUri()
+
+        return ResponseEntity
+                .created(WebMvcLinkBuilder
+                        .linkTo(this.getClass())
+                        .slash(entity.getId())
+                        .toUri()
                 )
                 .body(userMapper.toResponseDto(entity));
     }
@@ -67,14 +71,18 @@ public class UserController {
     public ResponseEntity<UserResponseDto> update(@PathVariable Long id, @Valid @RequestBody UserUpdateRequestDto requestDto) {
 
         User updatedEntity = userService.update(id, userMapper.toEntity(requestDto));
-        return ResponseEntity.ok()
+
+        return ResponseEntity
+                .ok()
                 .body(userMapper.toResponseDto(updatedEntity));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
+
         userService.delete(id);
-        return ResponseEntity.ok()
+        return ResponseEntity
+                .ok()
                 .body(null);
     }
 }
