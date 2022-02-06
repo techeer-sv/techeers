@@ -1,14 +1,14 @@
 package com.techeer.techeers.domain.user.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.apache.catalina.User;
 import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 public class UserEntity {
     @Id
@@ -22,18 +22,20 @@ public class UserEntity {
     private String email;
 
     @Column(nullable = false , length = 50)
-    private String password;
+    private String phoneNumber;
 
     @Column(nullable = false , length = 50)
-    private String phoneNumber;
+    private String password;
+
 
     //    @ColumnDefault("user")
 //    private String role;
     @Builder
-    public UserEntity(String firstName, String email, String password, String phoneNumber) {
+    public UserEntity(String firstName, String email, String phoneNumber,String password ) {
         this.firstName = firstName;
         this.email = email;
-        this.password = password;
         this.phoneNumber = phoneNumber;
+        this.password = password;
+
     }
 }
