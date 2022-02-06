@@ -1,5 +1,6 @@
 package com.techeer.techeers.domain.user.entity;
 
+import com.techeer.techeers.domain.order.entity.Order;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +13,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -51,6 +55,9 @@ public class User {
     @JoinColumn(name = "address_id", nullable = false)
     private Address address;
 
+    @OneToMany(mappedBy = "user")
+    private Set<Order> orders = new HashSet<>();
+
     @Builder
     public User(String email, String password, String firstName, String lastName, String phoneNumber, Address address) {
         this.email = email;
@@ -68,5 +75,10 @@ public class User {
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.address = address;
+    }
+
+    public void addOrder(Order order) {
+        order.setUser(this);
+        orders.add(order);
     }
 }
